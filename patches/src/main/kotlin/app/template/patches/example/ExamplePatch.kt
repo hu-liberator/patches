@@ -4,29 +4,28 @@ import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.template.patches.shared.Constants.COMPATIBILITY_EXAMPLE
 
-private const val EXTENSION_CLASS = "Lapp/template/extension/ExamplePatch;"
-
 @Suppress("unused")
 val examplePatch = bytecodePatch(
-    name = "Example Patch",
-    description = "Example patch to start with.",
+    name = "Remove idokep ads",
+    description = "Removes ads from the idokep app.",
     default = true
 ) {
     compatibleWith(COMPATIBILITY_EXAMPLE)
 
-    dependsOn(internalPatch)
-
-    extendWith("extensions/extension.mpe")
-
     // Business logic of the patch to disable ads in the app.
     execute {
-        AdLoaderFingerprint.method.addInstructions(
-            0,
-            """
-                invoke-static {}, $EXTENSION_CLASS;->showAds()Z
-                move-result v0
-                return v0
-            """
-        )
+        // AdvertDecisionChain's decision methods return true when an ad should
+        // be shown. Force each ad-decision entry point to always return false so
+        // no ads are ever displayed. These are fixed-value overrides, so no
+        // extension code is required.
+        listOf(DecideFingerprint, DecideOnClothesFingerprint).forEach { fingerprint ->
+            fingerprint.method.addInstructions(
+                0,
+                """
+                    const/4 v0, 0x0
+                    return v0
+                """
+            )
+        }
     }
 }
