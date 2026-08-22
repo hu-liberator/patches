@@ -31,7 +31,8 @@ object Constants {
         apkFileType = ApkFileType.APK, // Preferred or recommended file type.
         appIconColor = 0x00695C, // App's primary color
         targets = listOf(
-            AppTarget(version = "2.4.19-prod") // Works with all versions
+            AppTarget(version = "2.4.19-prod"),
+            AppTarget(version = "2.5.16-prod"),
         )
     )
 
