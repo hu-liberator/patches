@@ -1,3 +1,9 @@
+## [1.0.1-dev.1](https://github.com/hu-liberator/patches/compare/v1.0.0...v1.0.1-dev.1) (2026-10-16)
+
+### 🚀 Updated App Support
+
+* add support for MÁVPlusz 2.6.13-prod ([5dfd2fb](https://github.com/hu-liberator/patches/commit/5dfd2fb5522957d8ff75795bb9f050c1081108e6))
+
 ## 1.0.0 (2026-08-04)
 
 ### ✨ New Features
