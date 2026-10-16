@@ -31,7 +31,15 @@ object Constants {
         apkFileType = ApkFileType.APK, // Preferred or recommended file type.
         appIconColor = 0x00695C, // App's primary color
         targets = listOf(
-            AppTarget(version = "2.4.19-prod") // Works with all versions
+            AppTarget(version = "2.4.19-prod"),
+            AppTarget(version = "2.5.16-prod"),
+            // All ten patches' fingerprints resolve and apply cleanly against
+            // 2.6.13-prod unchanged -- including the ones with strict internal
+            // shape assertions (gating-flag instruction shape, request-patch
+            // wrap-call lookup, broadcast-receiver SecurityException-site count)
+            // -- because none of them pin this app's R8-renamed obfuscated
+            // names; they anchor on stable literal strings and bytecode shape.
+            AppTarget(version = "2.6.13-prod"),
         )
     )
 
